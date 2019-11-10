@@ -1,0 +1,84 @@
+# Ember CLI
+
+Ember CLI is to Ember what Artisan is to Laravel. It contains a lot of helpful command-line tools that maintain consistency, and makes Ember a simpler and more developer friendly environment. Ember CLI has now become a core feature of Ember, and does a lot of stuff like building, live-reload, serving, generation, etc, all of which eat a chain of dicks in other frameworks. Ember CLI also contains a lot of Ember addons by default.
+
+Ember's CLI isn't just a simple wrapper around something like Yeoman for facilitating new projects, but a comprehensive and powerful tool. People familiar with other frameworks (or JavaScript in general) will know how much of a pain it can be working with the tools to get a project actually up. Linting, minifying, uglifying, concatinating, moving files, Sass/less compiling, transcribing ES6, etc, is all done in something like gulp or webpack. This means setting up tools, checking paths, creating directories, installing dependencies, managing add-ons, and so on. It's not a killer, but... It is a bit of a pain.
+
+Where Ember differs is that the CLI handles all of this for you. Ember CLI does a staggering amount of stuff. It creates new Ember applications. It generates boilerplate. It manages add-ons. It runs full build systems, a server, live reloading, debugging, testing, deployment, and more. There is literally zero setup for most apps. No gulp or grunt files. No configuration.
+
+The other thing Ember CLI provides is a range of generation blueprints. These allow boilerplate to be immediately created, while maintaining consistency of code, and of name. It is highly recommended to use these generators instead of creating the files or directories manually. Otherwise you accidentally spell "adapter" wrong and it takes you two frustrating days of debugging to notice. Or so I'm told.
+
+## Installing the Ember CLI
+
+Much of Ember is built around (and by) the Ember CLI - a command-line tool that handles building, asset processing, depenency management, and a whole lot of other things.
+
+The first step is to install this. Doing so requires npm, the Node Package Manager. NPM is certain to be installed on almost any environment that a Laravel install is running on, and is definitely installed on any Homestead installation.
+
+## Creating a new app
+
+The process of creating a new Ember application is surprisingly simple. One of the best features of Ember is the ability to get a working project with a high degree of functionality up and running extremely quickly. Ember CLI can do this easily.
+
+```console
+ember new todos-demo
+```
+
+Once NPM finishes installing all the stuff, you will have an ember app that works and is editable. All the directories are created and ready to go. If you're playing along at ome you should probably change into the `todos-demo` directory or the rest of this isn't going to work particularly well.
+
+## Ember Serve
+
+Ember CLI includes a node based server to serve as a development environment for your app. When you type `ember serve` it will run up that server, fully building your application. It will then pop up a message saying how to access the site. Generally this is at `http://localhost:4200`.
+
+The ember serve command can take a number of parameters, such as manually setting the port, or proxying an API to put off security requirements. Again, this is much like what Laravel offers in `artisan serve`.
+
+When you run this command, Ember will sit there happily being a server, and you will lose access to your command line. You'll just need to make a new terminal session and continue. For the most part you don't need to do anything.
+
+## Compiling, concatenating, building, and transpiling with Broccolli
+
+In any modern JavaScript application there are a bunch of things that need to be done pretty regularly. For example, scripts need to be minified, and concatenated into a single file for more efficient downloads. ES20x scripts need to be translated to ES5 for use. Coffeescript needs to be converted. Sass needs to be complied. And so on. Each of these things is kind of a pain, but together they're a real burden for maintenance. This is not a new problem, nor is it one without solutions.
+
+The term used for these is usually something along the lines of a _task runner_. Grunt was a popular solution for a long time, able to run a number of small tasks in sequence through a NodeJS application. Gulp took the same ideas, but made the developer experience a little nicer.
+
+Broccoli is another approach. I'm not actually going to go into a lot of detail on how Broccoli works and how it differs from Gulp, for two simple reasons - I don't know. And I don't care. The benefit of EmberCLI is to isolate me from the tedium of setup required to handle these assets and transformations. And it just does. It's exceptionally fast, and handles all of this nonsense.
+
+Broccoli and EmberCLI will by default sit and watch your files.
+
+T> If you use PHPStorm, or pretty much any IDE, you should make sure you omit the `/tmp` directory from its file change watching. There are lots of changes happening here that are totally irrelevant to your IDE, and can have significant performance hit.
+
+## Installing Addons
+
+The addon ecosystem for Ember is impressive, and contains access to a range of utilities and services, a few of which we'll use for this project, and a lot more of which we'll use for the next one.
+
+[Ember Addons](https://www.emberaddons.com/) and [Ember Observer](http://emberobserver.com/) are both excellent resources to find addons for Ember without flailing around on Google and finding irrelevant things.
+
+We want to get a quick start on layout without putting too much effort in, so first of all, let's install bootstrap. Installing an addon just uses a simple syntax: `ember install name-of-addon`. In this case we want to use the package Ember Bootstrap, so we can just type `ember install ember-bootstrap`. This will handle all the NPM stuff and Bower stuff, and add in any CSS or javascript files that are required by the addon. Just because I know we're going to use it anyway, let's throw some Font Awesome icons in there as well. Enter `ember install ember-cli-font-awesome` and that one will do the same stuff.
+
+
+T> Installing a new addon is one of the few things Ember server can't quite get its pretty little head around. It doesn't have access to the new files that are added while it's running. Just kill it (control + c, and yes, even on a Mac) and type `ember server` again and it will come back up.
+
+To show how easy these addons are to use, we'll just do some more setup to make things look better. Open up `apps/templates/application.hbs` and wrap all of the contents of that in a bootstrap container div.
+
+```
+<div class="container">
+// everything that was already here
+</div>
+```
+
+You'll notice that the bodgy h1 tag has moved closer to the middle now, given at least the pretense of a bootstrap grid. If you're following at home, you're welcome to put as much or little effort into grid and styling as you want. We just want something vaguely servicable here, so there's no need to polish it up too much. Just to make sure the fontawesome plugin is workking, let's modify the h1 tag, and add in a fontawesome icon. In the absence of anything more suitable, there's one called task, so we'll just use that.
+
+With all these changes made, this is the complete code of the application template
+
+```
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2 id="title">{{fa-icon "tasks"}} Things I Have To Do</h2>
+    </div>
+  </div>
+
+  <div class="row">
+  {{outlet}}
+  </div>
+
+</div>
+```

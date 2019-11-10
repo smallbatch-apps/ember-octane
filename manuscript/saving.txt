@@ -1,0 +1,56 @@
+
+## Creating Items
+
+With no items to edit, there's really not a lot here worth seeing. The first thing to do is to update the `app/routes/todo/new.js` route action and model. We need it to do more than just add to the collection, because that's just the stuff Ember is aware of, not the data that's actually on the server. We also need to change the model to make it an Ember Data model.
+
+We'll do that first, and it's only a small code change.
+
+```
+model(){
+	return store.createRecord('todo', {
+  		text: '',
+  		checked: false
+	});
+}
+```
+
+This new model is created and added to the store, but it's not saved to anything yet. We handle that in the action. Because our model is actually a proper Ember Data model, the process here becomes quite a bit simpler.
+
+```
+actions: {
+	create(model){
+		this.store.pushObject(model);
+
+		model.save();
+	}
+}
+```
+
+## Handling updates
+
+The updating of data is not much different to how it is now. The only difference is that we no longer have an edit route, so we can't put the action on the edit route. We can put it on the todo route, though. So let's move that entirely as-is.
+
+The action we have doesn't do a lot. All it does is show an alert, which is fine when messing around with test data, but not exactly ideal with persistent data. We need to persist any changes we make. Thankfully that's trivial.
+
+```
+actions: {
+	update(item){
+		item.save();
+		alert('saved');
+	}
+}
+```
+
+You'll probably be noticing at this point how little code is needed here. `item.save()` is a crazy small amount of code to write to persist our data. It should be noticed that this code would **not change** if we were writing back to a Laravel server, or anything else. This code doesn't have to know or care how it's persisted or where. The details of **how** to save are handled in Ember Data, in particular in that localStorage adapter and serializer we added in before.
+
+## Updating our checking
+
+There's very little to do here. Again, nothing much needs to change except to persist the existing updates. The action for this is already on the todo route - it is a feature of the list, after all. So we don't have to move it.
+
+```
+actions: {
+	checkItem(item){
+	  Ember.set(item, 'checked', !Ember.get(item, 'checked'));
+	}
+}
+

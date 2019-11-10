@@ -1,0 +1,6 @@
+
+-# Making a simple Ember App
+
+In this chapter we will begin creating a very basic Ember application. It's a stand-alone app, and has no database layer, so Laravel is not a factor here.
+
+This will just be a simple list of ToDo items, so we can take a clean look at a well-known standard app that steps just a little beyond "Hello World" without wandering into complex business requirements or confusing syntax. In some ways this is a bad choice. The true benefits of a framework like Ember (or Laravel for that matter) are only realised with more complicated projects. It's important to bear that in mind with tutorials such as this. In order to be useful as a teaching aid it almost by definition can't be complicated enough to need what's being taught.

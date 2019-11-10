@@ -1,0 +1,11 @@
+# Fitting the Pieces
+
+The primary "thing" in an Ember app is the URL, which is mapped to a Route. All things stem from here. Once Ember has a route object it will expect some specific things. The first is a model hook. Unlike Laravel, where you pretty much get whatever data is appropriate in the controller, Ember wants to create a `model` object. If you look at the index route at `app/routes/index.js` you will see the syntax as `model():` which returns a pretty obvious array of dummy data. That's really all Ember needs. Once the route has a model it's actually pretty much set. The other major thing that exists on here is an actions hook, which contains the actions for that route. We'll go into that quite a bit more, as this is a major part of actually making it do things.
+
+You'll notice also that the Laravel pattern isn't in place here. As I mentioned earlier, Laravel will let you get any arbitrary data, create a view, pass the data to the view, and then return the result. Ember has only done the first part. The rest is all implied and automatic. Ember knows what the template is called, it **has** to be called `app/templates/index.hbs` because that's the only thing that makes sense. Ember enforces its conventions ruthlessly, or at best with only a tiny bit of ruth. It also passes the model directly to that template.
+
+## Constructing Templates
+
+How Ember builds templates is a bit more complex. It's not entirely dissimilar to Laravel's Blade templates except that it builds them backwards, from the outside in, rather than Laravel building from the inside. The difference is largely because once generated, a blade template is done. An Ember template is certainly going to change.
+
+In Ember, an `{{outlet}}` tag tells Ember where to insert any child templates. Templates at the same level will replace themselves in an outlet. This probably doesn't actually make sense at this point, but when you see a worked example it's a lot clearer. We'll cover it a lot more when we start building a few routes.
