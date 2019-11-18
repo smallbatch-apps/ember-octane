@@ -26,26 +26,26 @@ The main thing we'll do first is to open our template, which will live at `app/t
 
 There are some obvious answers to linking. The most obvious solution for linking routes is to just make an `a href` tag and link directly to the route. This will absolutely work, but won't be as "single page appy" as we'd like it to be. Ember provides a `link-to` helper that makes things much nicer. Laravel previously had much the same thing in `link_to_route`, but that's now only available in externally managed packages. The link-to helper lets Ember control a link, and keeps it internal to the framework, making for faster transitions and maintaining all of its state. A link to our about-us page can be made pretty simply.
 
- ```~~
-{{#link-to 'about-us'}}About Us{{/link-to}}
- ```~~
+ ```
+ {{#link-to 'about-us'}}About Us{{/link-to}}
+ ```
 
 The `#` makes this a block helper, one that has content. Link-to is obviously the helper, and 'about-us' is obviously the route. This helper actually takes a large (bewilderingly large sometimes) number of properties and options. For example, you can pass it the classes you want put on the link, or pass in an object to link to. The only other thing we're going to want to do for this one is to customise the tag used. Ember will happily put `class="active"` on the element used by the link-to helper, but that doesn't work for us. This is because Twitter Bootstrap expects the active class to be on a list item, not an a tag. We can do this by adding the tagName property.
 
- ```~~
+ ```
 {{#link-to 'about-us' tagName="li"}}About Us{{/link-to}}
- ```~~
+ ```
 
 T> Do wrap your links in a `<ul class="navbar">` tag as well, so it's all valid and bootstrapped.
 
 Linking to home is much the same, and you should end up with the following as all of your navigation.
 
-```~~
+```
 <ul class="navbar">
     {{#link-to 'index' tagName='li'}}Home{{/link-to}}
     {{#link-to 'about-us' tagName='li'}}About Us{{/link-to}}
 </ul>
- ```~~
+ ```
 
 We'll explore some of link-to's fancier features when there are more interesting things to link to.
 
@@ -53,7 +53,7 @@ We'll explore some of link-to's fancier features when there are more interesting
 
 In order for a route to contain the kind of data that makes it actually useful to have an SPA at all, the route needs a model. This just means adding a model hook to the existing boilerplate for your todo route.
 
-```~
+```
 // app/todo/route.js
 export default Ember.Route.extend({
 	model(){
@@ -65,7 +65,7 @@ export default Ember.Route.extend({
 		];
 	}
 });
-```~
+```
 
 This data is now part of the route, and accessible in its templates, etc. This is obviously a naive example. You would rarely hardcode data like this. A more common approach would be to use Ember Data models, which is kind of like the equivalent of an Eloquent model. These are out of scope for now, and kind of pointless because we're not planning on saving anything back to a server.
 
@@ -77,11 +77,11 @@ What we're creating is a nested route. This is again quite similar to how a Lara
 
 The syntax is similar to a route, but inside another route, as a callback.
 
-```~
+```
 this.route('todo', function(){
      this.route('show', {path: ':todo_id'});
 });
-```~
+```
 
 Note that this is just how it's done. You don't need to actually write this code, as again Ember CLI will update the router when you run a generator `ember generate route todo/show --path=:todo_id` will get the job done handily. The `--path` there is optional,  and could have just been put in manually, but doing it in one step is often easier.
 
@@ -121,7 +121,7 @@ So we'll need to provide a model hook for the todo.show route as well. In this c
 
 Note that in this case we need to pass the parameters into the model hook. That wasn't necessary in the listing, because it didn't take any parameters.
 
-```~
+```
 // app/todo/show.js
 export default Ember.Route.extend({
 	model(params){
@@ -131,7 +131,7 @@ export default Ember.Route.extend({
 		});
 	}
 });
-```~
+```
 
 T> If you look at the docs for link-to you'll see that it shows the third option as the id, which would make you think you pass in todo.todo_id instead of the whole todo object. Either will work, but they work slightly differently. Passing in the id makes the show route run its own model hook, whereas passing in the object overrides it. In this app it's not noticeably different, but in many larger applications that show route model hook will run an API request. This would make passing in the model significantly faster and cleaner.
 

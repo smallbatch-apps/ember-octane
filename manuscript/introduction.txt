@@ -2,15 +2,21 @@
 
 # Introduction
 
-This book is intended for Laravel developers looking to build complex and intuitive front-end applications, specifically Single Page Apps, often abbreviated to SPA.
+This book is intended for JavaScript developers looking to build complex and intuitive front-end applications, specifically Single Page Apps, often abbreviated to SPA.
 
-This initial book does not go into any detail on Laravel itself. It assumes a basic familiarity with the Laravel framework, which it uses to compare and contrast related Ember functionality. Architecturally and in its approach, Ember differs quite a lot from typical JavaScript frameworks. However, in the same way it's very much more like backend frameworks such as Laravel.
+It derives from an earlier work that used the PHP framework Laravel as a base of knowledge, and compared the patterns and features with Ember, not as an alternative, but as a complementary technology. Much of that approach is still valid now. Ember is an excellent fit for the mentality of someone with a good knowledge of backend languages and approaches in frameworks such as Rails, Phoenix, Django, or indeed Laravel.
 
-If you've run across this and don't actually know Laravel, you don't need to worry. This is strongly focused on Ember alone.
+If you've run across this and don't actually know Laravel or any of these other frameworks, you don't need to worry. This is strongly focused on Ember alone.
 
-## A partner to Laravel
+## Why the Backend framework comparison matters
 
-I've seen a number of things referred to as the most "Laravel-like" JS framework, but it's hard to see how they justify that. With Ember, the parallels are strong. Both are highly opinionated MVC frameworks. Both include a comprehensive range of integrated features. Both incorporate a lot of functionality into a CLI utility. Both are inspired by and derived from Rails. Both include comprehensive routers. They support clear separation of concerns. They both use discrete templates. They both have similar attitudes to rational defaults, to convention over configuration, to testing, and to eliminating unnecessary code.
+People often choose a framework for the backend based on a number of extremely valid reasons. Most particularly, comprehensive tools, aka "monoliths" or "batteries included" frameworks provide extensive features and design patterns and architecture that simplify more complex application development.
+
+Providing this integrated environment and a well established ecosystem of community solutions is accepted as a powerful benefit of frameworks such as Rails or Symfony.
+
+Yet somehow when people look at frontend frameworks those arguments are abandoned in favour of a collection of libraries creating an ad hoc framework.
+
+With Ember, the parallels with something like Laravel are strong and seemingly obvious. They are highly opinionated MVC frameworks. Both include a comprehensive range of integrated features. Both incorporate a lot of functionality into a powerful CLI utility. Both are inspired by and derived from Rails. Both include comprehensive routers. They support clear separation of concerns. They both use discrete templates with custom templating DSLs. They both have similar attitudes to rational defaults, to convention over configuration, to testing, and to eliminating unnecessary code.
 
 All the same arguments for Laravel can be made for Ember. An Ember application means treating the frontend with the same respect as the backend, and acknowledging JavaScript as a powerful and capable application platform in its own rights - not just decoration on the backend.
 
@@ -18,12 +24,12 @@ All the same arguments for Laravel can be made for Ember. An Ember application m
 
 The first thing to talk about is the obvious one. Why Ember? Why use Ember instead of the other frameworks around, such as VueJS, Angular, or React? Everyone has things they do and don't like about them, and one person's con can be an person's pro. The reason that I like Ember is that I find it an excellent way to be extremely productive very quickly. To my mind, this is what a framework is for.
 
-Ember is entirely built around the paradigm of the Single Page App. As Ember's webpage calls it, an "ambitious web application". Ambitious as used here doesn't refer to being the next Facebook. A single page app has to handle a lot of different requirements, such as routing, state management, HTTP access, authentication, templating, acceptance testing, string formatting, and so on. All of this is built into Ember. Ember is great at building SPAs. 
+Ember is entirely built around the paradigm of the Single Page App. As Ember's webpage calls it, an "a framework for ambitious web developers". Ambitious as used here doesn't refer to being the next Facebook. A single page app has to handle a lot of different requirements, such as routing, state management, HTTP access, authentication, templating, acceptance testing, string formatting, and so on. All of this is built into Ember. Ember is great at building SPAs.
 
-It's a lot less good at other things, though. Not all JavaScript is an SPA. A lot of the time, complex Javascript is implemented inside an existing app, which is not a good fit for Ember.
+It's a lot less good at other things, though. Not all JavaScript is an SPA. A lot of the time, complex JavaScript is implemented inside an existing app, which is not a good fit for Ember.
 
-The long term intention here is to build two SPAs with Ember. The first one, and the one covered by this book, is a  simple app to get our feet wet in a basic Ember implementation. 
+The long term intention here is to build two SPAs with Ember. The first one, and the one covered by this book, is a simple app to get our feet wet in a basic Ember implementation.
 
-The second one is to be a more complicated single page app. This second app connects to an API written in Laravel for persistence and data storage. Building the second app will obviously be quite a lot more challenging, and take up the majority of our time, which is why a simple app will be made first to cover a lot of the getting started process, and familiarise ourselves with Ember's conventions and architecture.
+We might well create a more complex application in a later addition, but a simple app will be made first to cover a lot of the getting started process, and familiarise ourselves with Ember's conventions and architecture.
 
 {mainmatter}
